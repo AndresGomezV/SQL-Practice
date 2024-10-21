@@ -240,9 +240,37 @@ INSERT INTO categories_dishes VALUES (
   17.95
 );
 
+SELECT name, street_number, street_name, telephone
+FROM restaurant, address;
 
+SELECT rating as best_rating, description
+FROM review
+WHERE rating = ( SELECT MAX(rating) FROM review);
 
+SELECT dish.name AS dish_name, categories_dishes.price AS price, category.name AS category
+FROM dish, category, categories_dishes
+WHERE dish.id = categories_dishes.dish_id
+AND category.id = categories_dishes.category_id
+ORDER BY dish_name;
 
+SELECT category.name AS category, dish.name AS dish_name, categories_dishes.price AS price 
+FROM dish, category, categories_dishes
+WHERE dish.id = categories_dishes.dish_id
+AND category.id = categories_dishes.category_id
+ORDER BY category;
 
+SELECT dish.name AS spicy_dish_name, category.name AS category, categories_dishes.price AS price 
+FROM dish, category, categories_dishes
+WHERE dish.id = categories_dishes.dish_id
+AND category.id = categories_dishes.category_id
+AND dish.hot_and_spicy IS TRUE
+ORDER BY spicy_dish_name;
+
+-- dishes that span multiple categories
+SELECT dish.name AS dish_name, dish.id, COUNT(dish_id) AS dish_count
+FROM dish, categories_dishes
+GROUP BY dish.name, categories_dishes.dish_id, dish.id
+HAVING
+ COUNT(dish_id) > 1 AND categories_dishes.dish_id = dish.id;
 
 
