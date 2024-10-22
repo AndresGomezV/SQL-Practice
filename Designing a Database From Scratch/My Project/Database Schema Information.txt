@@ -1,0 +1,50 @@
+Online Store:
+
+Customers:
+    Id 
+    First Name
+    Last Name
+    Email Address
+    Phone Number
+    Shipping Address
+    
+Products:
+    Id
+    Name
+    Price
+    Description
+    Stock
+    Category
+
+Orders: 
+    Id
+    Customer Id
+    Date
+    Status
+    Shipping Address
+    Payment Id
+
+Order Items:
+    Id
+    Order Id
+    Product Id
+    Quantity
+    Price
+
+
+Payments:
+    Id
+    Order Id
+    Method
+    Amount
+    Date
+    Status
+
+Relations:
+
+Customers - Orders: One To Many
+Orders - Payments: One To One
+Products - Order Items: One To Many
+Orders - Order Items: One To Many
+Orders - Products: Many To Many
+
